@@ -1,6 +1,7 @@
 # Crossing-Counties
-Initially planned during bitcamp 2025, compares counties to help people relocating for work
-Using Streamlit for front end and Pandas to process data and perform elementary analysis
+Initially planned during bitcamp 2025, compares counties to help people relocating for work.
+Using Streamlit for front end and Pandas to process data and perform elementary data analysis
+
 Dataset Sources: 
 
 Fair market rent by county data: https://www.huduser.gov/portal/datasets/fmr.html#data_2025
