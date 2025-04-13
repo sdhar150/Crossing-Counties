@@ -57,11 +57,11 @@ def get_State(fips):
 def graph_Income_By_House_Size(fips1,fips2):
     household_size = [1,2,3,4,5,6,7,8]
     fig, ax = plt.subplots()
-    plt.title('Expected (median) income per household size')
+    plt.title('Income levels by county per household size')
     plt.xlabel('Number of members in a household')
     plt.ylabel('40 percent of Median annual income (in USD)')
-    ax.scatter(household_size,get_County_Income(fips1).iloc[0,4:].astype(int),label='County 1')
-    ax.scatter(household_size,get_County_Income(fips2).iloc[0,4:].astype(int),label='County 2')
+    ax.scatter(household_size,get_County_Income(fips1).iloc[0,4:].astype(int),label=get_County_Name(fips1))
+    ax.scatter(household_size,get_County_Income(fips2).iloc[0,4:].astype(int),label=get_County_Name(fips2))
     ax.legend()
     st.pyplot(fig)
 
