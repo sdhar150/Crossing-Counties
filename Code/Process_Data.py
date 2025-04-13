@@ -5,6 +5,12 @@ import streamlit as st
 
 rent_data = pd.read_excel('Fair_Market_Rents.xlsx',sheet_name='FY25_FMRs_revised')#import rent data
 
+def get_States():
+    return rent_data['stusps'].unique().astype(str)
+
+def get_Counties(state):
+    return rent_data[rent_data['stusps'] == state]['countyname'].astype(str)
+
 def fix_Format():
     #The following code fixes some formatting issues when importing data from the sheet
     for row in range(478):
@@ -15,8 +21,8 @@ def get_County_Rent(fips,rooms):
     county_info = rent_data[fips == rent_data['fips'].astype(str)]
     return county_info[str('fmr_'+str(rooms))].iloc[0]
 
-def get_County_FIPS(county_name):
-    county = rent_data[rent_data['countyname'] == county_name]
+def get_County_FIPS(county_name,state):
+    county = rent_data[(rent_data['countyname'] == county_name) & (rent_data['stusps'] == state)]
     return str(county.iloc[0,7])
 
 def get_County_Name(fips):
@@ -48,20 +54,23 @@ def get_State(fips):
     state = str(find_state.iloc[0])
     return state
 
-def graph_Income_By_House_Size(income_data,fips):
-    st.header('40% Annual media income by house size in ' + get_County_Name(fips) + ', ' + get_State(fips))
+def graph_Income_By_House_Size(fips1,fips2):
     household_size = [1,2,3,4,5,6,7,8]
-    display_chart = pd.DataFrame(household_size,income_data[income_data['fips'] == fips].iloc[0,4:])
-    st.scatter_chart(display_chart,x_label='Household size',y_label='Annual Incomes (in USD)')
+    fig, ax = plt.subplots()
+    plt.title('Expected (median) income per household size')
+    plt.xlabel('Number of members in a household')
+    plt.ylabel('40 percent of Median annual income (in USD)')
+    ax.scatter(household_size,get_County_Income(fips1).iloc[0,4:].astype(int),label='County 1')
+    ax.scatter(household_size,get_County_Income(fips2).iloc[0,4:].astype(int),label='County 2')
+    ax.legend()
+    st.pyplot(fig)
 
 def get_County_Stats(fips,rooms):
-    if(isinstance(fips,str)):
+    if(isinstance(fips,str) & (fips != '')):
         result = ''
         result += 'For your apartment, expect a fair market rent of $' + str(get_County_Rent(fips,rooms)) + ' per month\n'
         result += '\nRent in this county should be: ' +  str(round(float(get_County_Rent(fips,rooms))/average_rent(rooms),2))   
-        result += ' times the average rent for a house with '  + str(rooms) + ' rooms \n'
-        #graph_Income_By_House_Size(get_County_Income(fips),fips)
-        graph_Income_By_House_Size(get_State_Income_Data(fips),fips)
+        result += ' times the average rent across the US for a house with '  + str(rooms) + ' rooms \n'
         return result
 
 def average_rent(rooms):
