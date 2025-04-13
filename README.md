@@ -10,4 +10,6 @@ Fair market rent by county data: https://www.huduser.gov/portal/datasets/fmr.htm
 Median income by county data: https://home.treasury.gov/system/files/136/SLFRF-LMI-tool.xlsx
 
 
-To use the project, use this start up guide and by the end run Display_Data.py: https://docs.streamlit.io/get-started
+To use the project, follow this guide on Streamlit: https://docs.streamlit.io/get-started
+
+After installing, run 'streamlit run Display_Data.py'
