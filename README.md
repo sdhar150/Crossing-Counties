@@ -110,7 +110,7 @@ runtime.
     git clone https://github.com/sdhar150/Crossing-Counties.git
     cd Crossing-Counties
 
-### 2. Install dependencies
+### 2. Install dependencies (in venv)
 
     pip install -r requirements.txt
 
@@ -134,7 +134,7 @@ The application searches for data files in:
 -   `Code/` subdirectory
 -   Parent directory
 
-### 5. Run the Application
+### 5. Run the Application (in venv)
 
     streamlit run Display_Data.py
 
