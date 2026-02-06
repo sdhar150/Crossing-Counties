@@ -120,24 +120,10 @@ runtime.
 
 -   Source: U.S. Department of Housing and Urban Development
 -   Download: FY2025 Fair Market Rents
--   Sheet required: `FY25_FMRs_revised`
--   Rename file to:
-
-```{=html}
-<!-- -->
-```
-    Fair_Market_Rents.xlsx
 
 #### Income Data
 
 -   Source: U.S. Department of Treasury
--   File: SLFRF-LMI-tool.xlsx
--   Rename file to:
-
-```{=html}
-<!-- -->
-```
-    Income_Data.xlsx
 
 ### 4. Place Files
 
@@ -173,12 +159,6 @@ The application searches for data files in:
 -   All county joins are performed using normalized 5-digit FIPS codes.
 -   National average rent is calculated dynamically using a mean across
     all counties.
--   Affordability is computed as:
-
-```{=html}
-<!-- -->
-```
-    (2BR Rent) / (Monthly 40% Median Income for 4-Person Household) × 100
 
 ## License
 
